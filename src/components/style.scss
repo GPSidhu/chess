@@ -1,0 +1,24 @@
+$board-size: 800;
+$square-size: $board-size/8;
+
+.board {
+    display: table;
+    height: #{$board-size}px;
+    width: #{$board-size}px;
+    border: 1px solid black;
+    .file {
+        display: flex;
+        .square {
+            display: block;
+            height: #{$square-size}px;
+            width: #{$square-size}px;
+            border: 1px solid black;
+        }
+    }
+}
+.black {
+    background-color: lighten(black, 30%);
+}
+.white {
+    background-color: white;
+}
