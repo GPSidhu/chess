@@ -1,24 +1,102 @@
-$board-size: 800;
-$square-size: $board-size/8;
+$board-size: 720;               //px
+$square-size: $board-size/8;    //px
+$piece-size: $board-size/8 - 5;      //px
 
+html {
+    font-family: sans-serif;
+}
+//Main.js
+.chess {
+    display: block;
+    width: 80%;
+    margin: auto;
+    .container {
+        display: flex;
+        flex-direction: row;
+        .left-container {
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .user-panel {
+                height: 80px;
+            }
+            .board-container {
+                display: block;
+                height:70%;
+            }
+        }
+        .right-container {
+            width: 30%;
+            background-color: lighten(grey, 40%);
+        }
+    }
+}
+
+// Board.js
 .board {
+    position: relative;
     display: table;
-    height: #{$board-size}px;
-    width: #{$board-size}px;
+    height: $board-size*1px;
+    width: $board-size*1px;
     border: 1px solid black;
     .file {
         display: flex;
         .square {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
             height: #{$square-size}px;
             width: #{$square-size}px;
-            border: 1px solid black;
+            font-weight: bold;
+            .rank-txt {
+                width: 100%;
+                display: block;
+                height: 100%;
+                padding: 2px;
+            }
+            .last-rank {
+                height: 80%;
+            }
+            .file-txt {
+                padding: 2px;
+                text-align: end;
+                vertical-align: baseline;
+            }
         }
     }
 }
+
 .black {
-    background-color: lighten(black, 30%);
+    background-color: lighten(#cc8143, 10%);
+    color: white;
 }
 .white {
-    background-color: white;
+    background-color: lighten(#f5eece, 5%);
+    color: lighten(#cc8143, 10%);
+}
+
+.rotate {
+    animation: rotateBoard 2s;
+}
+@keyframes rotateBoard {
+    0% {transform: rotate(180deg)}
+}
+
+//ControlPanel.js
+
+
+// Piece.js
+.piece {
+    position: absolute;
+    height: $piece-size*1px;
+    width: $piece-size*1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // top: 90px;
+    // left: 450px;
+    img {
+        width: 90%;
+    }
 }

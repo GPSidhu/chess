@@ -9,5 +9,6 @@ export const PIECE_TYPES = {
     B: 'Bishop',
     N: 'Knight',
     R: 'Rook',
-    //Pawn has no notation
+    P: 'Pawn'
 }
+export const INIT_FEN_STR = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
