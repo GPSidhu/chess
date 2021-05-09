@@ -26,7 +26,7 @@ class Piece extends Component {
     }
     render() {
         return (
-            <div className='piece' style={this.props.style}>
+            <div className='piece' style={this.props.style} onClick={(e) => {alert('piece clicked')}}>
                 <img src={pieceIcons[pieceIconMap[this.props.type]]} alt={pieceIconMap[this.props.type]} />
             </div>
         )

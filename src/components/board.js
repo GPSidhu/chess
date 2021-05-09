@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import PropTypes from 'prop-types';
 // import ExampleSVG from '../icons/wB.png';
 import Piece from './piece';
 import './style.scss';
@@ -8,8 +9,15 @@ import {
     RANKS,
     WHITE,
     BLACK,
-    INIT_FEN_STR
+    INIT_FEN_STR,
+    BOARD_SQ_SIZE,
+    SQUARES,
+    RANKS_MAP,
+    FILES_MAP
 } from '../constants';
+import {
+    FRToSquare
+} from '../utils/conversions';
 
 class Board extends Component {
     constructor(props) {
@@ -19,8 +27,35 @@ class Board extends Component {
             resetPressed: false,
             fen: INIT_FEN_STR
         };
+        this.filesArray = new Array(BOARD_SQ_SIZE);
+        this.ranksArray = new Array(BOARD_SQ_SIZE);
+        this.piecesArray = new Array(BOARD_SQ_SIZE);
+        this.fiftyMove = 0;
+        this.hisPly = 0; //count of half moves either side
+        this.ply = 0;   // count of half moves in search tree
+        this.castlePerm = 0;
+        this.initBoard();
     }
-    
+
+    initBoard() {
+        // Initialise all squares as offboard
+        for (let i = 0; i < BOARD_SQ_SIZE; i++) {
+            this.filesArray[i]  = SQUARES.OFFBOARD;
+            this.ranksArray[i] = SQUARES.OFFBOARD;
+        }
+        // Initialise all board piece square values (8x8) with corresponding files/ranks
+        for (let rank = RANKS_MAP['1']; rank <= RANKS_MAP['8']; rank++) {
+            for (let file = FILES_MAP['a']; file <= FILES_MAP['h']; file++) {
+                let sq = FRToSquare(file, rank);
+                this.filesArray[sq] = file;
+                this.ranksArray[sq] = rank;
+            }
+        }
+        console.log("filesArray[0]: "+this.filesArray[0]+" ranksArray[0]: "+this.ranksArray[0]);
+        console.log("filesArray[A1]: "+this.filesArray[SQUARES.A1]+" ranksArray[A1]: "+this.ranksArray[SQUARES.A1]);
+        console.log("filesArray[E8]: "+this.filesArray[SQUARES.E8]+" ranksArray[E8]: "+this.ranksArray[SQUARES.E8]);
+
+    }
     componentDidUpdate(prevProps) {
         // rotate board based if viewMode changes i.e. either black or white on top
         if (this.props.viewMode !== prevProps.viewMode) {
@@ -33,6 +68,11 @@ class Board extends Component {
                     rotatePressed: false
                 }))
             }, 2000)
+        }
+        if (this.props.fen !== prevProps.fen) {
+            this.setState((state) => ({
+                fen: this.props.fen
+            }))
         }
     }
 
@@ -107,7 +147,6 @@ class Board extends Component {
         let pieces = [];
         for (let s in rankStr) {
             const c = rankStr[s];
-            // console.log(c)
             if (/^\d+$/.test(c)) {
                 // Empty square
                 counter += parseInt(c);
@@ -132,7 +171,6 @@ class Board extends Component {
         if (!fenStr)
             return null;
         
-        console.log('fen: '+fenStr)
         const fenArr = fenStr.split(' ');
         const positions = fenArr[0].split('/');
         return positions;
@@ -152,6 +190,12 @@ class Board extends Component {
             </div>
         )
     }
+}
+
+Board.propTypes = {
+    fen: PropTypes.string.isRequired,
+    size: PropTypes.number,
+    viewMode: PropTypes.number
 }
 
 export default Board

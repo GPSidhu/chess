@@ -8,6 +8,7 @@ class Main extends Component {
     constructor() {
         super()
         this.state = {
+            // board: [8][8],
             viewMode: WHITE,
             player1: {
                 name: 'Player 1 - White'
@@ -18,6 +19,7 @@ class Main extends Component {
         }
         this.rotateBoard = this.rotateBoard.bind(this);
         this.resetBoard = this.resetBoard.bind(this);
+        this.setFENPosition = this.setFENPosition.bind(this);
     }
 
     rotateBoard() {
@@ -31,6 +33,12 @@ class Main extends Component {
     resetBoard() {
         this.setState((state) => ({
             fen: INIT_FEN_STR
+        }))
+    }
+
+    setFENPosition(fenStr) {
+        this.setState((state) => ({
+            fen: fenStr
         }))
     }
 
@@ -50,7 +58,7 @@ class Main extends Component {
                         </div>
                     </div>
                     <div className='right-container'>
-                        <ControlPanel onResetBoard={this.resetBoard} onRotateBoard={this.rotateBoard}/>
+                        <ControlPanel onSetPosition={this.setFENPosition} onResetBoard={this.resetBoard} onRotateBoard={this.rotateBoard}/>
                     </div>
                 </div>
             </div>
