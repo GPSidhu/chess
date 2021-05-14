@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { INIT_FEN_STR } from '../constants';
+import MoveTracker from './MoveTracker';
 
 class ControlPanel extends Component {
     constructor(props){
@@ -31,6 +32,8 @@ class ControlPanel extends Component {
                 <button type="button" onClick={() => {this.props.onSetPosition(this.state.position)}} className="btn">Set Position</button>
                 <button className='btn' onClick={() => {this.props.onResetBoard()}}>Reset</button>
                 <button className='btn' onClick={() => {this.props.onRotateBoard()}}>Rotate</button>
+
+                <MoveTracker />
             </div>
         )
     }

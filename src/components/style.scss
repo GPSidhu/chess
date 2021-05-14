@@ -1,121 +1,123 @@
-$board-size: 720;               //px
-$square-size: $board-size/8;    //px
-$piece-size: $board-size/8;      //px
+$board-size: 720; //px
+$square-size: $board-size/8; //px
+$piece-size: $board-size/8; //px
 
 html {
-    font-family: sans-serif;
+	font-family: sans-serif;
 }
 //Main.js
 .chess {
-    display: block;
-    width: 80%;
-    margin: auto;
-    .container {
-        display: flex;
-        flex-direction: row;
-        .left-container {
-            width: 60%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            .user-panel {
-                height: 80px;
-            }
-            .board-container {
-                display: block;
-                height:70%;
-            }
-        }
-        .right-container {
-            width: 40%;
-            background-color: lighten(grey, 40%);
-        }
-    }
+	display: block;
+	width: 80%;
+	margin: auto;
+	.container {
+		display: flex;
+		flex-direction: row;
+		.left-container {
+			width: 60%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			.user-panel {
+				height: 80px;
+			}
+			.board-container {
+				display: block;
+				height: 70%;
+			}
+		}
+		.right-container {
+			width: 40%;
+		}
+	}
 }
 
 // Board.js
 .board {
-    position: relative;
-    display: table;
-    height: $board-size*1px;
-    width: $board-size*1px;
-    border: 1px solid black;
-    .file {
-        display: flex;
-        .square {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            height: #{$square-size}px;
-            width: #{$square-size}px;
-            font-weight: bold;
-            .rank-txt {
-                width: 100%;
-                display: block;
-                height: 100%;
-                padding: 2px;
-            }
-            .last-rank {
-                height: 80%;
-            }
-            .file-txt {
-                padding: 2px;
-                text-align: end;
-                vertical-align: baseline;
-            }
-        }
-    }
+	position: relative;
+	display: table;
+	height: $board-size * 1px;
+	width: $board-size * 1px;
+	border: 1px solid black;
+	.file {
+		display: flex;
+		.square {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			height: #{$square-size}px;
+			width: #{$square-size}px;
+			font-weight: bold;
+			.rank-txt {
+				width: 100%;
+				display: block;
+				height: 100%;
+				padding: 2px;
+			}
+			.last-rank {
+				height: 80%;
+			}
+			.file-txt {
+				padding: 2px;
+				text-align: end;
+				vertical-align: baseline;
+			}
+		}
+	}
 }
 
 .black {
-    background-color: lighten(#cc8143, 10%);
-    color: white;
+	background-color: lighten(#cc8143, 10%);
+	color: white;
 }
 .white {
-    background-color: lighten(#f5eece, 5%);
-    color: lighten(#cc8143, 10%);
+	background-color: lighten(#f5eece, 5%);
+	color: lighten(#cc8143, 10%);
 }
 
 .rotate {
-    animation: rotateBoard 2s;
+	animation: rotateBoard 2s;
 }
 @keyframes rotateBoard {
-    0% {transform: rotate(180deg)}
+	0% {
+		transform: rotate(180deg);
+	}
 }
 
 //ControlPanel.js
 .control-panel {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    .fen {
-        width: 100%;
-        label {
-            width: 10%;
-            padding-right: 10px;
-        }
-        input {
-            width: 80%;
-        }
-    }
-    .btn {
-        margin: 5px;
-        width: 150px;
-    }
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #e6e6e6;
+	padding: 5px;
+	.fen {
+		width: 100%;
+		label {
+			width: 10%;
+			padding-right: 10px;
+		}
+		input {
+			width: 80%;
+		}
+	}
+	.btn {
+		margin: 5px;
+		width: 150px;
+	}
 }
 
 // Piece.js
 .piece {
-    position: absolute;
-    height: $piece-size*1px;
-    width: $piece-size*1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-        width: 90%;
-    }
+	position: absolute;
+	height: $piece-size * 1px;
+	width: $piece-size * 1px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	img {
+		width: 90%;
+	}
 }

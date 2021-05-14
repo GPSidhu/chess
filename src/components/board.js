@@ -107,6 +107,7 @@ class Board extends Component {
     }
 
     renderBoard () {
+        
         const boardSize = this.props.size;
         const viewMode = this.props.viewMode;
         let grid = [];
